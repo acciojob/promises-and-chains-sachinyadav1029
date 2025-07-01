@@ -5,11 +5,10 @@ document.getElementById('voteForm').addEventListener('submit', function (e) {
   const age = parseInt(document.getElementById('age').value.trim(), 10);
 
   if (!name || isNaN(age)) {
-    alert("Please enter valid details.");
+    alert("Please enter valid details"); // ✅ Removed period to match Cypress test
     return;
   }
 
-  // Create promise
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (age > 18) {
