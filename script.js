@@ -1,27 +1,28 @@
-document.getElementById("voteForm").addEventListener("submit", function (e) {
-      e.preventDefault(); // prevent default form submission
+document.getElementById('voteForm').addEventListener('submit', function (e) {
+  e.preventDefault(); // Prevent form from submitting
 
-      const nameInput = document.getElementById("name").value.trim();
-      const ageInput = document.getElementById("age").value.trim();
+  const name = document.getElementById('name').value.trim();
+  const age = parseInt(document.getElementById('age').value.trim(), 10);
 
-      if (nameInput === "" || ageInput === "") {
-        alert("Please enter valid details.");
-        return;
+  if (!name || isNaN(age)) {
+    alert("Please enter valid details.");
+    return;
+  }
+
+  // Create promise
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (age > 18) {
+        resolve();
+      } else {
+        reject();
       }
-
-      const age = Number(ageInput);
-
-      const checkEligibility = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (age > 18) {
-            resolve(`Welcome, ${nameInput}. You can vote.`);
-          } else {
-            reject(`Oh sorry ${nameInput}. You aren't old enough.`);
-          }
-        }, 4000);
-      });
-
-      checkEligibility
-        .then((message) => alert(message))
-        .catch((errorMessage) => alert(errorMessage));
-    });
+    }, 4000);
+  })
+  .then(() => {
+    alert(`Welcome, ${name}. You can vote.`);
+  })
+  .catch(() => {
+    alert(`Oh sorry ${name}. You aren't old enough.`);
+  });
+});
