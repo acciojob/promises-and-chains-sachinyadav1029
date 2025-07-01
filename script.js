@@ -6,7 +6,7 @@ let btn = document.getElementById("btn");
 
 btn.addEventListener("click" , (e)=>{
 
-	e.preventDefault()
+
 	const myPromise = new Promise((resolve , reject)=>{
 
 		 const val = Number(age.value.trim());
