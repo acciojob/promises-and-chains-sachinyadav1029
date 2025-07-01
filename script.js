@@ -3,7 +3,7 @@ let nameInput = document.getElementById("name");
 let btn = document.getElementById("btn");
 
 btn.addEventListener("click", (e) => {
-  e.preventDefault();
+  //e.preventDefault();
 
   const age = ageInput.value.trim();
   const name = nameInput.value.trim();
