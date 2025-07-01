@@ -1,35 +1,31 @@
-//your JS code here. If required.
-let age =  document.getElementById("age");
-let name =  document.getElementById("name");
+let ageInput = document.getElementById("age");
+let nameInput = document.getElementById("name");
 let btn = document.getElementById("btn");
 
+btn.addEventListener("click", (e) => {
+  e.preventDefault();
 
-btn.addEventListener("click" , (e)=>{
+  const age = ageInput.value.trim();
+  const name = nameInput.value.trim();
 
+  if (!age || !name) {
+    alert("Please enter valid details.");
+    return;
+  }
 
-	const myPromise = new Promise((resolve , reject)=>{
+  const userAge = Number(age);
 
-		 const val = Number(age.value.trim());
-        const n = name.value.trim();
+  const checkVotingEligibility = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (userAge >= 18) {
+        resolve(`Welcome, ${name}. You can vote.`);
+      } else {
+        reject(`Oh sorry ${name}. You aren't old enough.`);
+      }
+    }, 4000);
+  });
 
-		setTimeout(()=>{
-			
-			if(val >= 18){
-			resolve(`Welcome, ${n}. You can vote`);
-		   }else{
-				reject(`Oh sorry ${n}. You aren't old enough`)
-		  }
-
-				myPromise.then((message)=>{
-			alert(message)
-		}).catch((errormsg)=>{
-			alert(errormsg)
-		})
-
-		 	
-		},4000)
-
-	
-		
-	})
-})
+  checkVotingEligibility
+    .then(message => alert(message))
+    .catch(error => alert(error));
+});
